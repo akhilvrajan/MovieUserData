@@ -142,7 +142,7 @@ def get_score(refpoint):
     except:
         return None
 
-def get_critic(refpoint):
+def get_user(refpoint):
     """
     Searches for the next critic from a given reference point,
     'refpoint', and returns it
@@ -152,10 +152,10 @@ def get_critic(refpoint):
         output = get_critic(refpoint)
     """
     try:
-        critic = refpoint.find_next('div', attrs={'class': re.compile(r'^metascore')}) \
+        user = refpoint.find_next('div', attrs={'class': re.compile(r'^metascore')}) \
                         .find_next('span', attrs={'class': re.compile(r'^author')})\
                         .get_text().lower()
-        return critic
+        return user
     except:
         return None
 
