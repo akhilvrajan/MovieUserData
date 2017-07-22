@@ -4,7 +4,7 @@ from a film's 'critic-reviews' page on the metacritic website.
 
 Last Update: March, 2017
 """
-
+ 
 # load packages - some might be obselete
 import requests
 from bs4 import BeautifulSoup
