@@ -43,7 +43,7 @@ for iYear in relevantYears:
         for row in csv.reader(f):
             currentURL = ''.join(row) # convert list to string
             movieID = currentURL.rsplit('/', 1)[-1].rsplit('.', 1)[0]
-            targetURL = currentURL + '/critic-reviews'
+            targetURL = currentURL + '/user-reviews'
             print('Now scraping', movieID)
             ##--- Scraper Start ---##
             #df_metaScore, df_movie = critics.scrape_metaScorePage(targetURL, df_metaScore)
