@@ -1,11 +1,11 @@
 """
-Main file to scrape the critic review information for movies from metacritic
+Main file to scrape the user review information for movies from metacritic
 
 This file runs the scraper for one year, 'iYear' for all movies stored in a file
 containing links to a metacritic webpage
 
 Outputs:
-    * Each movie has all critic reviews stored in XXX
+    * Each movie has all user reviews stored in XXX
     * the MetaScores for all movies are stored in a csv XXX
 
 Expected Usage:
@@ -23,7 +23,7 @@ import csv
 # append the ROOT directory to the python path so it can search thru subdirs
 sys.path.insert(0, os.getcwd())
 
-from src.lib import processCriticReviews as critics
+from src.lib import processUserReviews as users
 
 #Candidate years
 yearStart = int(sys.argv[1])
@@ -46,22 +46,22 @@ for iYear in relevantYears:
             targetURL = currentURL + '/user-reviews'
             print('Now scraping', movieID)
             ##--- Scraper Start ---##
-            #df_metaScore, df_movie = critics.scrape_metaScorePage(targetURL, df_metaScore)
-            soup = critics.get_soup(targetURL)
+            #df_metaScore, df_movie = users.scrape_metaScorePage(targetURL, df_metaScore)
+            soup = users.get_soup(targetURL)
             #print(soup)
             if soup is not None:
                 try:
                     # get Meta Information
-                    meta_Score, meta_nReview = critics.get_allMeta(soup, movieID)
-                    title = critics.get_title(soup)
+                    meta_Score, meta_nReview = users.get_allMeta(soup, movieID)
+                    title = users.get_title(soup)
 
                     # append meta Information
                     df_temp = pd.DataFrame([[movieID, title, meta_Score, meta_nReview]])
                     df_metaScore = df_metaScore.append(df_temp, ignore_index=True)
 
-                    # get critic information
+                    # get user information
                     if meta_nReview is not None:
-                        df_movie = critics.get_allReviews(soup, meta_nReview, movieID, title)
+                        df_movie = users.get_allReviews(soup, meta_nReview, movieID, title)
                     print('Finished collecting reviews from', targetURL )
 
                     # pass back the updated
@@ -75,7 +75,7 @@ for iYear in relevantYears:
                 pass
 
             ##--- Scraper End ---##
-            # save critic reviews for this movie as a DataFrame
+            # save user reviews for this movie as a DataFrame
             df_movie.to_csv(datadirRoot + '/movieReviews-' + str(iYear) + '/' + \
                                 movieID + '-reviews.csv', index = False)
             time.sleep(randint(5,15))
