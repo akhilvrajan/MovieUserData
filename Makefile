@@ -1,8 +1,6 @@
 include config.mk
 include init.mk
 
-YEAR_START = 2015
-YEAR_END = 2016
 ## getReviews           : scrapes critic reviews by year
 .PHONY: getReviews
 getReviews: $(SRC_LIB)/processUserReviews.py #getLinks
