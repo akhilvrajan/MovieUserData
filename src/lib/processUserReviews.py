@@ -128,7 +128,7 @@ def get_title(soup):
 
 def get_score(refpoint):
     """
-    Searches for the next critic review score from a given reference point,
+    Searches for the next user review score from a given reference point,
     'refpoint', and returns it
 
     Expected Usage:
@@ -144,12 +144,12 @@ def get_score(refpoint):
 
 def get_user(refpoint):
     """
-    Searches for the next critic from a given reference point,
+    Searches for the next user from a given reference point,
     'refpoint', and returns it
 
     Expected Usage:
         (a reference point is set - the function 'get_allReviews' manages this)
-        output = get_critic(refpoint)
+        output = get_user(refpoint)
     """
     try:
         user = refpoint.find_next('div', attrs={'class': re.compile(r'^metascore')}) \
@@ -220,7 +220,7 @@ def get_allReviews(soup, nReview, movieID, title):
             # get score
             score = get_score(newref)
             # get author
-            author = get_critic(newref)
+            author = get_user(newref)
             # get publication
             publication = get_publication(newref)
             # get review link (incase we want text later - we might if we wanna do bias etc)
