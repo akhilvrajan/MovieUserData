@@ -1,10 +1,12 @@
 include config.mk
 include init.mk
 
+YEAR_START = 2015
+YEAR_END = 2016
 ## getReviews           : scrapes critic reviews by year
 .PHONY: getReviews
 getReviews: $(SRC_LIB)/processUserReviews.py #getLinks
-	python $(SRC_MAIN)/getMovieReviews.py $(YEAR_START) $(Year_END) $(OUT_LINKS) $(OUT_DATA)
+	python $(SRC_MAIN)/getMovieReviews.py $(YEAR_START) $(YEAR_END) $(OUT_LINKS) $(OUT_DATA)
 
 ## getLinks           : scrapes weblinks to movie's pages by year
 .PHONY: getLinks
